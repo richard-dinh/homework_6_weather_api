@@ -1,0 +1,22 @@
+html{
+  box-sizing: border-box;
+}
+
+.jumboStyle {
+  text-align: center;
+  background-color: black;
+  color: white;
+}
+
+body {
+  background-color: lightgray
+}
+
+.searchBar{
+  margin-right: 5px;
+  padding-left: 2px;
+}
+
+.forecast{
+  text-align: center
+}
