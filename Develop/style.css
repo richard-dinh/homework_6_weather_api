@@ -1,4 +1,4 @@
-html{
+html {
   box-sizing: border-box;
 }
 
@@ -12,11 +12,35 @@ body {
   background-color: lightgray
 }
 
-.searchBar{
+.searchBar {
   margin-right: 5px;
   padding-left: 2px;
 }
 
-.forecast{
+.forecast {
   text-align: center
+}
+
+.uvHigh {
+  background-color: red;
+  color: white
+}
+
+.uvSafe {
+  background-color: green;
+  color: white
+}
+
+.uvMed {
+  background-color: yellow;
+  color: white
+}
+
+.uvMod {
+  background-color: orange;
+  color: white
+}
+
+span{
+  padding: 5px;
 }
