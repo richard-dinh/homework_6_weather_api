@@ -14,7 +14,7 @@ document.addEventListener('click', ()=>{
     //saving user input into pastCities array
     pastCities.push(userInput)
     // console.log(userInput)
-    getWeather(userInput)
+    displayWeather(userInput)
   }
 })
 
@@ -33,30 +33,7 @@ const getWeather = userInput =>{
     <p> Wind Speed: ${speed} mph </p>
     `
     display.append(info)
-
-    //Code to get UV Index
-    fetch(`http://api.openweathermap.org/data/2.5/uvi?appid=504fb55759317621b3658208c57633c9&lat=${lat}&lon=${lon}`)
-    .then(response => response.json())
-    .then(({value}) =>{
-      let uvNode = document.createElement('p')
-      uvNode.textContent = 'UV Index: '
-      let uvSpan = document.createElement('span')
-      uvSpan.textContent = `${value}`
-      switch(value){
-        case Math.floor(value)<=2: uvSpan.setAttribute('class', 'uvSafe')
-        break
-        case Math.floor(value) <= 5: uvSpan.setAttribute('class', 'uvMed')
-        break
-        case Math.floor(value) <= 7: uvSpan.setAttribute('class', 'uvMod')
-        break
-        default: uvSpan.setAttribute('class', 'uvHigh')
-        break
-      }
-      uvNode.append(uvSpan)
-      display.append(uvNode)
-    })
-
-    .catch(error => console.error(error))
+    getUvIndex(lon, lat)
   })
   .catch(error => console.error(error))
 }
@@ -68,4 +45,29 @@ const titleCase = str => {
     splitStr[i] = splitStr[i].charAt(0).toUpperCase() + splitStr[i].substring(1);
   }
   return splitStr.join(' ');
+}
+
+const getUvIndex = (lon, lat) =>{
+  fetch(`http://api.openweathermap.org/data/2.5/uvi?appid=504fb55759317621b3658208c57633c9&lat=${lat}&lon=${lon}`)
+    .then(response => response.json())
+    .then(({ value }) => {
+      let uvNode = document.createElement('p')
+      uvNode.textContent = 'UV Index: '
+      let uvSpan = document.createElement('span')
+      uvSpan.textContent = `${value}`
+      switch (value) {
+        case Math.floor(value) <= 2: uvSpan.setAttribute('class', 'uvSafe')
+          break
+        case Math.floor(value) <= 5: uvSpan.setAttribute('class', 'uvMed')
+          break
+        case Math.floor(value) <= 7: uvSpan.setAttribute('class', 'uvMod')
+          break
+        default: uvSpan.setAttribute('class', 'uvHigh')
+          break
+      }
+      uvNode.append(uvSpan)
+      display.append(uvNode)
+    })
+
+    .catch(error => console.error(error))
 }
