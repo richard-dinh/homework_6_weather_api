@@ -41,6 +41,14 @@ body {
   color: white
 }
 
-span{
+span {
   padding: 5px;
+}
+
+.fiveDayStyle {
+  background-color: lightskyblue;
+  color: black;
+  margin-right: 5px;
+  padding: 5px;
+
 }
