@@ -1,0 +1,54 @@
+html {
+  box-sizing: border-box;
+}
+
+.jumboStyle {
+  text-align: center;
+  background-color: black;
+  color: white;
+}
+
+body {
+  background-color: lightgray
+}
+
+.searchBar {
+  margin-right: 5px;
+  padding-left: 2px;
+}
+
+.forecast {
+  text-align: center
+}
+
+.uvHigh {
+  background-color: red;
+  color: white
+}
+
+.uvSafe {
+  background-color: green;
+  color: white
+}
+
+.uvMed {
+  background-color: yellow;
+  color: white
+}
+
+.uvMod {
+  background-color: orange;
+  color: white
+}
+
+span {
+  padding: 5px;
+}
+
+.fiveDayStyle {
+  background-color: lightskyblue;
+  color: black;
+  margin-right: 5px;
+  padding: 5px;
+
+}
