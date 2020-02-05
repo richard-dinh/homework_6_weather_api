@@ -1,8 +1,9 @@
 let userInput
 let uvIndex
-let pastCities = []
+let pastCities = JSON.parse(localStorage.getItem('cities')) || []
 let display = document.getElementById('cityInfo')
 let fiveSelect= document.getElementById('fiveDay')
+let citySelect = document.getElementById('pastCities')
 
 //  API KEY : 504fb55759317621b3658208c57633c9
 
@@ -12,13 +13,21 @@ document.addEventListener('click', ()=>{
   let target = event.target
   if(target.classList.contains('btn')){
     userInput = document.getElementById('citySearch').value
-    //saving user input into pastCities array
-    pastCities.push(userInput)
     // console.log(userInput)
     displayWeather(userInput)
   }
 })
 
+
+const renderPastCity = _ =>{
+  //set to empty before every render
+  citySelect.innerHTML = ''
+  for(let i = 0; i<pastCities.length; i++){
+    let cityNode = document.createElement('div')
+    cityNode.textContent = pastCities[i]
+    citySelect.append(cityNode)
+  }
+}
 const toFarenheit = value =>{
   value = (value * (9 / 5) - 459.67).toFixed(2)
   return value
@@ -33,10 +42,16 @@ const titleCase = str => {
   return splitStr.join(' ');
 }
 const displayWeather = userInput =>{
+  //pushing userInput to local storage
+  pastCities.push(userInput)
+  console.log(pastCities)
+  localStorage.setItem('cities', JSON.stringify(pastCities))
+  renderPastCity()
   getCityWeather(userInput)
 }
 
 const getCityWeather = userInput =>{
+  display.innerHTML = ''
   fetch(`https://api.openweathermap.org/data/2.5/weather?q=${userInput}&appid=504fb55759317621b3658208c57633c9`)
     .then(response => response.json())
     .then(({ main: { temp, humidity }, wind: { speed }, coord: { lon, lat } }) => {
@@ -83,6 +98,7 @@ const getUvIndex = (lon, lat) =>{
 }
 
 const getFiveDayForecast = (lon, lat) =>{
+  fiveSelect.innerHTML =''
   fetch(`http://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=504fb55759317621b3658208c57633c9`)
     .then(response => response.json())
     .then(({list}) => {
@@ -104,3 +120,5 @@ const getFiveDayForecast = (lon, lat) =>{
     })
     .catch(error => console.error(error))
 }
+
+renderPastCity()
