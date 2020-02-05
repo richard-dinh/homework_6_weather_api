@@ -15,6 +15,8 @@ document.addEventListener('click', ()=>{
     userInput = document.getElementById('citySearch').value
     // console.log(userInput)
     displayWeather(userInput)
+    //empty out userInput
+    document.getElementById('citySearch').value =''
   }
 })
 
@@ -24,7 +26,7 @@ const renderPastCity = _ =>{
   citySelect.innerHTML = ''
   for(let i = 0; i<pastCities.length; i++){
     let cityNode = document.createElement('div')
-    cityNode.textContent = pastCities[i]
+    cityNode.innerHTML = `${pastCities[i]} <hr>`
     citySelect.append(cityNode)
   }
 }
