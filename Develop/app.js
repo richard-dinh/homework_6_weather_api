@@ -75,7 +75,7 @@ const getCityWeather = userInput =>{
     .catch(error => console.error(error))
 }
 const getUvIndex = (lon, lat) =>{
-  fetch(`http://api.openweathermap.org/data/2.5/uvi?appid=504fb55759317621b3658208c57633c9&lat=${lat}&lon=${lon}`)
+  fetch(`https://api.openweathermap.org/data/2.5/uvi?appid=504fb55759317621b3658208c57633c9&lat=${lat}&lon=${lon}`)
     .then(response => response.json())
     .then(({ value }) => {
       let uvNode = document.createElement('p')
@@ -101,17 +101,19 @@ const getUvIndex = (lon, lat) =>{
 
 const getFiveDayForecast = (lon, lat) =>{
   fiveSelect.innerHTML =''
-  fetch(`http://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=504fb55759317621b3658208c57633c9`)
+  fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=504fb55759317621b3658208c57633c9`)
     .then(response => response.json())
-    .then(({list}) => {
-      console.log(list)
+    .then(data => {
+      console.log(data)
       //converting unix time stamp to a date time
+      let list = data.list
       console.log(moment.unix(list[0].dt).format("MM/DD/YYYY"))
       for(let i = 7; i<list.length; i+=7){
         let fiveNode = document.createElement('div')
         fiveNode.setAttribute('class', 'col-sm-2 fiveDayStyle')
         fiveNode.innerHTML =`
             <h6>${moment.unix(list[i].dt).format("MM/DD/YYYY")}</h6>
+            <img src ="https://openweathermap.org/img/wn/${list[i].weather[0].icon}.png" alt = "${list[i].weather[0].icon}">
             <p>Temp: ${toFarenheit(list[i].main.temp)} ºF</p>
             <p>Humidity: ${list[i].main.humidity}%</p>
         `
