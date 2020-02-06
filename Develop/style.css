@@ -33,12 +33,13 @@ body {
 
 .uvMed {
   background-color: yellow;
-  color: white
+  color: black;
+  
 }
 
 .uvMod {
   background-color: orange;
-  color: white
+  color: black;
 }
 
 span {
@@ -48,7 +49,7 @@ span {
 .fiveDayStyle {
   background-color: lightskyblue;
   color: black;
+  margin: 0 auto;
   margin-right: 5px;
-  padding: 5px;
-
+  padding: 10px;
 }
