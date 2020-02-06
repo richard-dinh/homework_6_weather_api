@@ -82,15 +82,18 @@ const getUvIndex = (lon, lat) =>{
       uvNode.textContent = 'UV Index: '
       let uvSpan = document.createElement('span')
       uvSpan.textContent = `${value}`
-      switch (value) {
-        case Math.floor(value) <= 2: uvSpan.setAttribute('class', 'uvSafe')
-          break
-        case Math.floor(value) <= 5: uvSpan.setAttribute('class', 'uvMed')
-          break
-        case Math.floor(value) <= 7: uvSpan.setAttribute('class', 'uvMod')
-          break
-        default: uvSpan.setAttribute('class', 'uvHigh')
-          break
+      value = Math.floor(value)
+      if(value < 3){
+        uvSpan.setAttribute('class', 'uvSafe')
+      }
+      else if (value > 2 && value <6){
+        uvSpan.setAttribute('class', 'uvMed')
+      }
+      else if (value > 5 && value < 8){
+        uvSpan.setAttribute('class', 'uvMod')
+      }
+      else{
+        uvSpan.setAttribute('class', 'uvHigh')
       }
       uvNode.append(uvSpan)
       display.append(uvNode)
