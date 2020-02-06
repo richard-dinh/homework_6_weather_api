@@ -110,7 +110,7 @@ const getFiveDayForecast = (lon, lat) =>{
       console.log(moment.unix(list[0].dt).format("MM/DD/YYYY"))
       for(let i = 7; i<list.length; i+=7){
         let fiveNode = document.createElement('div')
-        fiveNode.setAttribute('class', 'col-sm-2 fiveDayStyle')
+        fiveNode.setAttribute('class', 'col-sm-2.4 fiveDayStyle')
         fiveNode.innerHTML =`
             <h6>${moment.unix(list[i].dt).format("MM/DD/YYYY")}</h6>
             <img src ="https://openweathermap.org/img/wn/${list[i].weather[0].icon}.png" alt = "${list[i].weather[0].icon}">
