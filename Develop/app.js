@@ -45,6 +45,7 @@ const titleCase = str => {
 }
 const displayWeather = userInput =>{
   //pushing userInput to local storage
+  userInput = titleCase(userInput)
   pastCities.push(userInput)
   console.log(pastCities)
   localStorage.setItem('cities', JSON.stringify(pastCities))
@@ -57,7 +58,6 @@ const getCityWeather = userInput =>{
   fetch(`https://api.openweathermap.org/data/2.5/weather?q=${userInput}&appid=504fb55759317621b3658208c57633c9`)
     .then(response => response.json())
     .then(({ main: { temp, humidity }, wind: { speed }, coord: { lon, lat } }) => {
-      userInput = titleCase(userInput)
       let info = document.createElement('div')
       temp = toFarenheit(temp)
 
