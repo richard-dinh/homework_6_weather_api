@@ -33,12 +33,13 @@ body {
 
 .uvMed {
   background-color: yellow;
-  color: white
+  color: black;
+  
 }
 
 .uvMod {
   background-color: orange;
-  color: white
+  color: black;
 }
 
 span {
